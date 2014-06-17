@@ -36,26 +36,6 @@ class MVDisk:NSObject {
         var freeDisk = NSFileManager.defaultManager().attributesOfFileSystemForPath(NSHomeDirectory(), error: nil).objectForKey(NSFileSystemFreeSize).longLongValue
         return freeDisk
     }
-    class func totalDiskSpace() -> CLongLong {
-        var totalDisk = NSFileManager.defaultManager().attributesOfFileSystemForPath(NSHomeDirectory(), error: nil).objectForKey(NSFileSystemSize).longLongValue
-        return totalDisk
-    }
-    class func usedDiskSpace() -> CLongLong {
-        var usedSpace = self.totalDiskSpace() - self.freeDiskSpace()
-        return usedSpace
-    }
-    class func freeDiskSpaceFormat() -> String {
-        return self.formatter(self.freeDiskSpace())
-    }
-    class func applicationSpaceFormat() -> String {
-        return self.formatter(self.applicationSpace())
-    }
-    class func totalDiskSpaceFormat() -> String {
-        return self.formatter(self.totalDiskSpace())
-    }
-    class func usedDiskSpaceFormat() -> String {
-        return self.formatter(self.usedDiskSpace())
-    }
     class func applicationSpace() -> CLongLong {
         let fileManager = NSFileManager.defaultManager()
         let folderPath = NSBundle.mainBundle().bundlePath
@@ -67,5 +47,25 @@ class MVDisk:NSObject {
             fileSize += CLongLong(fileDictionary.fileSize())
         }
         return fileSize
+    }
+    class func totalDiskSpace() -> CLongLong {
+        var totalDisk = NSFileManager.defaultManager().attributesOfFileSystemForPath(NSHomeDirectory(), error: nil).objectForKey(NSFileSystemSize).longLongValue
+        return totalDisk
+    }
+    class func usedDiskSpace() -> CLongLong {
+        var usedSpace = self.totalDiskSpace() - self.freeDiskSpace()
+        return usedSpace
+    }
+    class func freeDiskSpaceFormatter() -> String {
+        return self.formatter(self.freeDiskSpace())
+    }
+    class func applicationSpaceFormatter() -> String {
+        return self.formatter(self.applicationSpace())
+    }
+    class func totalDiskSpaceFormatter() -> String {
+        return self.formatter(self.totalDiskSpace())
+    }
+    class func usedDiskSpaceFormatter() -> String {
+        return self.formatter(self.usedDiskSpace())
     }
 }
